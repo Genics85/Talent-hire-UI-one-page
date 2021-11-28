@@ -132,13 +132,20 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("My Coaches",
-                style:TextStyle(color:Colors.grey,fontWeight: FontWeight.bold)),
+                style:TextStyle(color:Colors.grey,fontWeight: FontWeight.bold, fontFamily: "Quick Sand")),
                 Text("View Past Sessions",
-                style:TextStyle(color:Colors.green,fontWeight: FontWeight.bold))
+                style:TextStyle(color:Colors.green,fontWeight: FontWeight.bold, fontFamily:"Quick Sand"))
               ],
             ),
 
-          )
+          ),
+          SizedBox(height:15),
+cardz("Sandra",true),
+cardz("Micheal",false),
+cardz("Sabath",false),
+          cardz("Eugene",true),
+          cardz("Elikem",false),
+          cardz("Justice",true),
 
         ]
       ),
@@ -146,3 +153,80 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+class cardz extends StatefulWidget{
+  String name;
+  bool avail;
+  cardz(this.name,this.avail);
+  @override
+  State<StatefulWidget> createState() {
+
+
+   return cardzState(name,avail);
+  }
+
+}
+class cardzState extends State<cardz>{
+  String name;
+  bool avail;
+
+  cardzState(this.name,this.avail);
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return   Card(
+      shape: RoundedRectangleBorder(
+        borderRadius:BorderRadius.circular(10),
+      ),
+      elevation: 7,
+      child: Column(
+        children: [
+          SizedBox(height: 12),
+          Stack(
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(color:Colors.red,
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                      image:NetworkImage(""),
+                    )
+                ),
+              ),Positioned(
+                right: 0,
+                child:  Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                      border:Border.all(color:Colors.white,width:2),
+                      color:avail?Colors.green:Colors.red),
+                ),
+              ),
+
+            ],
+
+          ),
+          SizedBox(height: 20,),
+          Text(name,style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),),
+
+          SizedBox(height: 20,),
+          Text(avail?"Available for the next few hours":"Not available",style: TextStyle(
+              color:Colors.grey,fontWeight: FontWeight.bold,fontSize: 19
+          ),),
+          SizedBox(height:20),
+
+        ],
+      ),
+
+    );
+  }
+
+}
+
+
